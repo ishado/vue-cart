@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Learn VueJS</title>
+  </head>
+  <body>
+    <h1>Welcome to Learn VueJS</h1>
+    <hr />
+
+    <div id="app">
+      <div class="product">
+        <div class="product-image">
+          <!-- <img v-bind:src="image" alt=""> -->
+          <img :src="image" alt="" />
+        </div>
+        <div class="prodect-info">
+          <!-- <h1>{{ company }} {{ product }}</h1> -->
+          <h1>{{ productName }}</h1>
+          <p v-if="numberOfProducts > 10">In Stock</p>
+          <p v-else-if="numberOfProducts <= 10 && numberOfProducts > 0">
+            Only {{ numberOfProducts }} item left
+          </p>
+          <p v-else>Out of Stock</p>
+
+          <div v-for="(color, i) in colors" :key="color.id">
+            <!-- <div v-for="color in colors" :key="color.id"> -->
+            <!-- <p v-on:mouseover="updateImage(color.image)">{{ color.name }}</p> -->
+            <!-- <p @mouseover="updateImage(color.image)">{{ color.name }}</p> -->
+            <!-- <div class="dot" @mouseover="updateImage(color.image)" :style="{'background-color': color.name}"></div> -->
+              <div class="dot" @mouseover="updateImage(i)" :style="{'background-color': color.name}"></div>
+            </div>
+          <!-- <button v-on:click="addToCart">Add to Cart</button> -->
+          <button
+            @click="addToCart"
+            :class="{disabledButton: !numberOfProducts}"
+            :disabled="!numberOfProducts"
+          >
+            Add to Cart
+          </button>
+          <div class="cart">
+            <p>Cart ({{ cartItems }})</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/vue.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
